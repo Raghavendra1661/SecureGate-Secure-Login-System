@@ -1,101 +1,89 @@
-# SecureGate — Secure Login System
+# 🔐 SecureGate – Secure Login System
 
-SecureGate is a small, server-rendered login application built with Flask, SQLite, and bcrypt. It is designed as a cybersecurity learning project: the authentication flow is short enough to follow, and the tests show what each important control is expected to do.
+## About the Project
 
-## What the application includes
+SecureGate is a web-based authentication system developed using Python Flask and SQLite. The project focuses on making user login and registration safer by implementing password hashing, input validation, and secure session management.
 
-- Account registration and login.
-- bcrypt password hashing with a work factor of 12; plaintext passwords are not saved.
-- Username validation and password rules, including bcrypt's 72-byte input limit.
-- Parameterized SQL statements rather than building queries from user input.
-- A per-session CSRF token on every form that changes data.
-- A protected dashboard and POST-only logout.
-- Session contents are cleared and rebuilt after successful login.
-- `HttpOnly`, `SameSite=Lax`, optional `Secure` session cookies, and basic browser security headers.
-- Automated tests for registration, hashing, login, logout, CSRF checks, and protected pages.
+The main idea behind SecureGate is to understand how authentication works in real-world applications and how basic security practices can help protect user accounts from unauthorized access.
 
-## Requirements
+## 🚀 Features
 
-- Python 3.10 or newer
-- pip
+- **User Registration:** Create a new account with basic input validation.
+- **Secure Login:** Authenticate users using their registered credentials.
+- **Password Hashing:** Uses bcrypt to store passwords securely instead of plain text.
+- **SQL Injection Protection:** Uses parameterized SQL queries.
+- **Session Management:** Maintains authenticated user sessions.
+- **Logout Functionality:** Securely ends the active session.
+- **CSRF Protection:** Validates form submissions to prevent cross-site request forgery.
+- **Dashboard:** Provides a protected page accessible only after login.
 
-## Run on Windows
+## 🛠️ Technologies Used
 
-Open PowerShell in the extracted project directory:
+- Python
+- Flask
+- SQLite
+- Bcrypt
+- HTML5
+- CSS3
 
-```powershell
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-py -m pip install -r requirements.txt
-py app.py
+## ⚙️ Installation and Setup
+
+**1. Clone the repository**
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
 ```
 
-If PowerShell does not allow virtual-environment activation, run the environment's Python directly:
+**2. Open the project folder**
 
-```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe app.py
+```bash
+cd SecureGate
 ```
 
-Visit **http://127.0.0.1:5000** in your browser.
+**3. Create a virtual environment**
 
-## Run the tests
-
-Stop the web server first, then run:
-
-```powershell
-py -m unittest discover -s tests -v
+```bash
+python -m venv .venv
 ```
 
-The tests use a temporary database, so they do not modify your normal `users.db` file.
+**4. Activate the environment (Windows)**
 
-## How to demonstrate it
+```bash
+.venv\Scripts\activate
+```
 
-1. Register a username such as `student_demo` with a password that meets the displayed rules.
-2. Open the database with a SQLite viewer and inspect the `users` table. The password column contains a bcrypt hash, not the password you typed.
-3. Log in and confirm that the dashboard displays your username.
-4. Log out and try opening `/dashboard` directly; the app should send you to the login page.
-5. Try a wrong password, a duplicate username, and a weak password.
-6. Submit a POST request without its CSRF token using the test suite; it should be rejected.
-7. Run the automated tests and explain what each test verifies.
+**5. Install dependencies**
 
-## Project structure
+```bash
+pip install -r requirements.txt
+```
+
+**6. Run the application**
+
+```bash
+python app.py
+```
+
+**7. Open in your browser**
 
 ```text
-secure_login_system/
-├── app.py                 # Routes, validation, database, and session logic
-├── requirements.txt       # Python dependencies
-├── users.db               # Created automatically on first run
-├── templates/             # Jinja HTML pages
-├── static/style.css       # Application styling
-└── tests/test_app.py      # Automated regression tests
+http://127.0.0.1:5000
 ```
 
-## Configuration
+## 🎯 Project Objective
 
-The default secret key is intentionally marked for local development only. Before deployment, set a long random key. Example for PowerShell:
+The objective of SecureGate is to build a simple authentication system while learning practical cybersecurity concepts such as password security, database protection, input validation, and session handling.
 
-```powershell
-$env:SECRET_KEY = "replace-with-a-long-random-secret"
-$env:COOKIE_SECURE = "1"
-py app.py
-```
+## 🔮 Future Improvements
 
-Set `COOKIE_SECURE=1` only when the site is served over HTTPS; otherwise the browser will not send the session cookie over local plain HTTP. You can set `DATABASE_PATH` to choose another SQLite file.
+- Two-Factor Authentication (2FA)
+- Password reset functionality
+- Email verification
+- Login attempt limiting
+- Security activity logs
 
-## Security notes and current limitations
+## 👨‍💻 Project Status
 
-This is an educational starter application, not a production identity service. It does not currently provide multi-factor authentication, password reset, email verification, persistent login throttling, or an audit trail. The in-process Flask development server must not be exposed as a production server. A real deployment needs HTTPS, a production WSGI server, a strong secret stored outside source control, rate limiting, monitoring, backups, dependency updates, and a security review. The built-in browser headers are a useful baseline, not a complete security policy.
+Developed as a practical cybersecurity and web development project to explore secure authentication techniques.
 
-## Understanding and presenting the project
-
-Be ready to explain these design choices in your own words:
-
-- **bcrypt:** slows down password guessing and stores a salted password hash.
-- **Parameterized SQL:** keeps submitted values separate from SQL syntax.
-- **CSRF token:** helps ensure a form submission came from a page issued to that browser session.
-- **Session protection:** limits access to the dashboard and clears the login state on logout.
-- **Validation:** rejects malformed usernames and passwords before saving an account.
-- **Automated tests:** check both successful flows and common invalid requests.
-
-If you extend the project, add one feature at a time, write a test for it, and record what you changed and why.
+**Note:** This is an educational project. Additional security testing and production hardening are required before real-world deployment.
