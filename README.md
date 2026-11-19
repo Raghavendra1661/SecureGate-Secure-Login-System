@@ -31,44 +31,42 @@ The main idea behind SecureGate is to understand how authentication works in rea
 **1. Clone the repository**
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/Raghavendra1661/SecureGate-Secure-Login-System.git
 ```
 
-**2. Open the project folder**
+**2. Navigate to the project folder**
 
 ```bash
-cd SecureGate
+cd SecureGate-Secure-Login-System
 ```
 
 **3. Create a virtual environment**
 
 ```bash
-python -m venv .venv
+py -m venv .venv
 ```
 
 **4. Activate the environment (Windows)**
 
-```bash
-.venv\Scripts\activate
+```powershell
+.\.venv\Scripts\Activate.ps1
 ```
 
-**5. Install dependencies**
+**5. Install the required packages**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-**6. Run the application**
+**6. Start the application**
 
 ```bash
-python app.py
+py app.py
 ```
 
-**7. Open in your browser**
+**7. Open the application**
 
-```text
-http://127.0.0.1:5000
-```
+Visit: http://127.0.0.1:5000
 
 ## 🎯 Project Objective
 
