@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Create account · SecureGate{% endblock %}
+{% block content %}
+<section class="auth-card">
+  <div class="symbol">🛡️</div>
+  <p class="eyebrow">GET STARTED</p>
+  <h1>Create your account</h1>
+  <p class="muted">Choose a username and a strong password.</p>
+  <form method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" minlength="3" maxlength="30" pattern="[A-Za-z0-9_]+" autocomplete="username" required>
+    <small>3–30 letters, numbers, or underscores.</small>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" minlength="8" autocomplete="new-password" required>
+    <small>At least 8 characters, including uppercase, lowercase, and a number.</small>
+    <button type="submit">Create account</button>
+  </form>
+  <p class="switch">Already registered? <a href="{{ url_for('login') }}">Log in</a></p>
+</section>
+{% endblock %}
